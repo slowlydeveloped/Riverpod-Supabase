@@ -82,7 +82,7 @@ class AddItemsState extends ConsumerState<AddItems> {
                       );
 
                       // Call the addItems method from the provider
-                      ref.read(addItemsProvider.notifier).addItems(items);
+                      ref.read(adminFunctionsProvider.notifier).addItems(items);
 
                       // Refresh the items list
                       ref.refresh(fetchItemsProvider);

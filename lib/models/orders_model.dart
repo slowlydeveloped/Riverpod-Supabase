@@ -13,14 +13,14 @@ class OrderModel {
 
 class OrderItemModel {
   int? orderId;
-  final int itemId;
+  final int recipeId;
   final int quantity;
   final int price;
   final String? recipeName;
 
   OrderItemModel({
     this.orderId,
-    required this.itemId,
+    required this.recipeId,
     required this.quantity,
     required this.price,
     this.recipeName,
@@ -29,7 +29,7 @@ class OrderItemModel {
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'order_id': orderId,
-      'item_id': itemId,
+      'recipe_id': recipeId,
       'quantity': quantity,
       'price': price,
     };
@@ -38,7 +38,7 @@ class OrderItemModel {
   factory OrderItemModel.fromJson(Map<String, dynamic> map) {
     return OrderItemModel(
       orderId: map['order_id'] != null ? map['order_id'] as int : null,
-      itemId: map['item_id'] as int,
+      recipeId: map['recipe_id'] as int,
       quantity: map['quantity'] as int,
       price: map['price'] as int,
     );
@@ -46,14 +46,14 @@ class OrderItemModel {
 
   OrderItemModel copyWith({
     int? orderId,
-    int? itemId,
+    int? recipeId,
     int? quantity,
     int? price,
     String? recipeName,
   }) {
     return OrderItemModel(
       orderId: orderId ?? this.orderId,
-      itemId: itemId ?? this.itemId,
+      recipeId: recipeId ?? this.recipeId,
       quantity: quantity ?? this.quantity,
       price: price ?? this.price,
       recipeName: recipeName ?? this.recipeName,

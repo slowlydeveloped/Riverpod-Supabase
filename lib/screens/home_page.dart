@@ -3,6 +3,8 @@ import 'package:task1/screens/admin_page.dart';
 import 'package:task1/screens/manager_page.dart';
 import 'package:task1/utils/common_button.dart';
 
+import 'view_available_stocks.dart';
+
 class HomePage extends StatefulWidget {
     static route() => MaterialPageRoute(builder: (context) => const HomePage());
   const HomePage({super.key});
@@ -40,6 +42,15 @@ class _HomePageState extends State<HomePage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) => const ManagerPage()));
+                }),
+                CommonButton(
+                title: "AvailableStockPage",
+                width: 200,
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const AvailableStockPage()));
                 })
           ],
         ),

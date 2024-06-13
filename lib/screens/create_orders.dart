@@ -15,13 +15,13 @@ class CreateOrderPage extends ConsumerStatefulWidget {
 
 class _CreateOrderPageState extends ConsumerState<CreateOrderPage> {
   final totalPriceController = TextEditingController();
-  final List<TextEditingController> itemIds = [];
+  final List<TextEditingController> recipeIds = [];
   final List<TextEditingController> quantities = [];
   final List<TextEditingController> prices = [];
 
   void addItemFields() {
     setState(() {
-      itemIds.add(TextEditingController());
+      recipeIds.add(TextEditingController());
       quantities.add(TextEditingController());
       prices.add(TextEditingController());
     });
@@ -29,7 +29,7 @@ class _CreateOrderPageState extends ConsumerState<CreateOrderPage> {
 
   void removeItemFields(int index) {
     setState(() {
-      itemIds.removeAt(index);
+      recipeIds.removeAt(index);
       quantities.removeAt(index);
       prices.removeAt(index);
     });
@@ -38,7 +38,7 @@ class _CreateOrderPageState extends ConsumerState<CreateOrderPage> {
   @override
   void dispose() {
     totalPriceController.dispose();
-    for (var controller in itemIds) {
+    for (var controller in recipeIds) {
       controller.dispose();
     }
     for (var controller in quantities) {
@@ -67,13 +67,13 @@ class _CreateOrderPageState extends ConsumerState<CreateOrderPage> {
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: itemIds.length,
+                itemCount: recipeIds.length,
                 itemBuilder: (context, index) {
                   return Row(
                     children: [
                       Expanded(
                         child: TextField(
-                          controller: itemIds[index],
+                          controller: recipeIds[index],
                           decoration:const InputDecoration(labelText: 'Item ID'),
                           keyboardType: TextInputType.number,
                         ),
@@ -111,15 +111,15 @@ class _CreateOrderPageState extends ConsumerState<CreateOrderPage> {
                   totalPrice: double.parse(totalPriceController.text),
                 );
 
-                final orderItems = List.generate(itemIds.length, (index) {
+                final orderItems = List.generate(recipeIds.length, (index) {
                   return OrderItemModel(
-                    itemId: int.parse(itemIds[index].text),
+                    recipeId: int.parse(recipeIds[index].text),
                     quantity: int.parse(quantities[index].text),
                     price: int.parse(prices[index].text),
                   );
                 });
                 ref
-                    .read(createOrderProvider.notifier)
+                    .read(adminFunctionsProvider.notifier)
                     .createOrder(order, orderItems);
               },
               child: const Text('Submit Order'),

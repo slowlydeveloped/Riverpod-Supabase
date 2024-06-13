@@ -73,7 +73,7 @@ class CreateRecipeState extends ConsumerState<CreateRecipe> {
                       itemQuantity: double.parse(quantityController.text),
                     );
                     ref
-                        .read(recipeCreationProvider.notifier)
+                        .read(adminFunctionsProvider.notifier)
                         .createRecipe(recipeCreation);
                     itemNameController.clear();
                     quantityController.clear();

@@ -1,12 +1,14 @@
-
 class RecipeModel {
+  int? recipeId;
   final String recipeName;
   final int recipePrice;
   final double? usedItemQuantity;
   final String? itemName;
 
   RecipeModel(
-      {required this.recipeName,
+      {
+        this.recipeId,
+        required this.recipeName,
       required this.recipePrice,
       this.usedItemQuantity,
       this.itemName});
@@ -15,6 +17,7 @@ class RecipeModel {
     return <String, dynamic>{
       'recipe_name': recipeName,
       'recipe_price': recipePrice,
+      'recipe_id':recipeId
     };
   }
 
@@ -22,10 +25,9 @@ class RecipeModel {
     return RecipeModel(
       recipeName: map['recipe_name'] as String,
       recipePrice: map['recipe_price'] as int,
+      recipeId: map['recipe_id'] as int,
     );
   }
-
-  
 
   RecipeModel copyWith({
     String? recipeName,

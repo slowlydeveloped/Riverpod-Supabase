@@ -53,7 +53,10 @@ class AddVendorsState extends ConsumerState<AddVendors> {
                 onPressed: () {
                   final vendors = VendorModel(
                       name: nameController.text, number: numberController.text);
-                  ref.read(addVendorProvider.notifier).addVendors(vendors);
+                  ref.read(adminFunctionsProvider.notifier).addVendors(vendors);
+
+                  nameController.clear();
+                  numberController.clear();
                 },
               ),
               const SizedBox(height: 20),
