@@ -1,15 +1,15 @@
-
 class RecipeCreationModel {
+  int? recipeId;
   final String recipeName;
   final String itemName;
   final double itemQuantity;
 
   RecipeCreationModel({
+    this.recipeId,
     required this.recipeName,
     required this.itemName,
-    required this.itemQuantity,
+    required this.itemQuantity, 
   });
-  
 
   Map<String, dynamic> toJson() {
     return <String, dynamic>{

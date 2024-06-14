@@ -6,9 +6,8 @@ class RecipeModel {
   final String? itemName;
 
   RecipeModel(
-      {
-        this.recipeId,
-        required this.recipeName,
+      {this.recipeId,
+      required this.recipeName,
       required this.recipePrice,
       this.usedItemQuantity,
       this.itemName});
@@ -17,7 +16,6 @@ class RecipeModel {
     return <String, dynamic>{
       'recipe_name': recipeName,
       'recipe_price': recipePrice,
-      'recipe_id':recipeId
     };
   }
 

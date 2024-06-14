@@ -55,7 +55,7 @@ class AddRecipeState extends ConsumerState<AddRecipe> {
                           recipeName: recipeNameController.text,
                           recipePrice: int.parse(recipePriceController.text));
 
-                      ref.read(adminFunctionsProvider.notifier).addRecipe(recipes);
+                      ref.read(addRecipeProvider.notifier).addRecipe(recipes);
                       Navigator.push(context, CreateRecipe.route());
                       recipeNameController.clear();
                       recipePriceController.clear();

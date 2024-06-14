@@ -5,11 +5,13 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final bool isObscureText;
   final TextInputType? textInputType;
+  final InputDecoration? decoration;
   const CustomTextFormField({
     super.key,
     this.textInputType,
     required this.hintText,
     required this.controller,
+    this.decoration,
     this.isObscureText = false,
   });
 
@@ -17,9 +19,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
-      decoration: InputDecoration(
-        hintText: hintText,
-      ),
+      decoration :decoration,
       keyboardType: textInputType,
       validator: (value) {
         if (value!.isEmpty) {

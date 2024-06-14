@@ -6,10 +6,15 @@ class CommonButton extends StatelessWidget {
     this.width = 100,
     required this.title,
     required this.onPressed,
+    this.buttonColor,
+    this.textColor,
+
   });
   final String title;
   final VoidCallback onPressed;
   final double width;
+  final MaterialColor? buttonColor;
+  final Color? textColor;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(

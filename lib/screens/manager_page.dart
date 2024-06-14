@@ -50,7 +50,7 @@ class _ManagerPageState extends ConsumerState<ManagerPage> {
             recipeId: item.recipeId!, quantity: 1, price: item.recipePrice))
         .toList();
 
-    final adminFunctions = ref.read(adminFunctionsProvider.notifier);
+    final adminFunctions = ref.read(createOrderProvider.notifier);
     await adminFunctions.createOrder(order, orderItems);
   }
 
@@ -61,60 +61,68 @@ class _ManagerPageState extends ConsumerState<ManagerPage> {
         title: const Text("Manager Page"),
       ),
       body: Center(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final itemsFuture = ref.watch(fetchRecipesProvider);
-                  return itemsFuture.when(
-                    data: (items) {
-                      _items =
-                          items; // Update the state variable with fetched items
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: items.length,
-                        itemBuilder: (context, index) {
-                          final item = items[index];
-                          return Card(
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  CheckboxListTile(
-                                    value: _selectedItems[index] ?? false,
-                                    title: Text(item.recipeName),
-                                    subtitle:
-                                        Text('Price: ₹ ${item.recipePrice}'),
-                                    onChanged: (bool? value) {
-                                      _toggleSelection(index, item.recipePrice);
-                                    },
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final itemsFuture = ref.watch(fetchRecipesProvider);
+                        return itemsFuture.when(
+                          data: (items) {
+                            _items =
+                                items; // Update the state variable with fetched items
+                            return ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: items.length,
+                              itemBuilder: (context, index) {
+                                final item = items[index];
+                                return Card(
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        CheckboxListTile(
+                                          value: _selectedItems[index] ?? false,
+                                          title: Text(item.recipeName),
+                                          subtitle:
+                                              Text('Price: ₹ ${item.recipePrice}'),
+                                          onChanged: (bool? value) {
+                                            _toggleSelection(index, item.recipePrice);
+                                          },
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                    loading: () => const CircularProgressIndicator(),
-                    error: (error, stack) => Text('Error: $error'),
-                  );
-                },
+                                );
+                              },
+                            );
+                          },
+                          loading: () => const CircularProgressIndicator(),
+                          error: (error, stack) => Text('Error: $error'),
+                        );
+                      },
+                    ),
+                  ),
+                  
+                ],
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Text('Total Price: ₹ $_totalPrice'),
-            ),
-            CommonButton(
-                title: "Make Order",
-                onPressed: () {
-                  _makeOrder();
-                })
-          ],
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text('Total Price: ₹ $_totalPrice'),
+              ),
+              CommonButton(
+                  title: "Make Order",
+                  onPressed: () {
+                    _makeOrder();
+                  }),
+            ],
+          ),
+          
         ),
       ),
     );
